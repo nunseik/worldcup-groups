@@ -15,13 +15,20 @@
 
 'use strict';
 
-const STORAGE_KEY = 'wc2026-scenario';
+const STORAGE_KEY = 'wc2026-scenario-v2';
 
 /* --- State ---------------------------------------------------------------
    results: array parallel to FIXTURES, each { hg, ag } as strings
             ('' = not entered; a fixture counts only when BOTH are filled).
-   picks:   { matchId -> winning teamId } for knockout matches. */
+   picks:   { matchId -> winning teamId } for knockout matches.
+
+   data.js is the source of truth for OFFICIAL (played) results: those always
+   come from FIXTURES and override anything in localStorage, so updating a
+   real scoreline in data.js shows up immediately. localStorage only persists
+   the user's PREDICTIONS for matches not yet officially played. */
 let state = { results: [], picks: {} };
+
+function fixtureKey(f) { return `${f.group}:${f.home}:${f.away}`; }
 
 function defaultResults() {
   return FIXTURES.map((f) => ({
@@ -36,11 +43,12 @@ function loadState() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return;
     const saved = JSON.parse(raw);
-    if (Array.isArray(saved.results)) {
-      saved.results.forEach((r, i) => {
-        if (r && i < state.results.length) {
-          state.results[i] = { hg: r.hg ?? '', ag: r.ag ?? '' };
-        }
+    // Apply saved predictions ONLY to fixtures not officially played in data.js.
+    if (saved.predictions && typeof saved.predictions === 'object') {
+      FIXTURES.forEach((f, i) => {
+        if (f.played) return; // official result wins
+        const p = saved.predictions[fixtureKey(f)];
+        if (p) state.results[i] = { hg: p.hg ?? '', ag: p.ag ?? '' };
       });
     }
     if (saved.picks && typeof saved.picks === 'object') state.picks = saved.picks;
@@ -51,7 +59,15 @@ function loadState() {
 
 function saveState() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    // Persist only predictions for not-yet-played fixtures, keyed by identity
+    // so they survive schedule/index changes. Official results live in data.js.
+    const predictions = {};
+    FIXTURES.forEach((f, i) => {
+      if (f.played) return;
+      const r = state.results[i];
+      if (r.hg !== '' || r.ag !== '') predictions[fixtureKey(f)] = r;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ predictions, picks: state.picks }));
   } catch (e) {
     /* storage may be unavailable; non-fatal */
   }

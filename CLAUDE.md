@@ -18,8 +18,13 @@ the user can predict all the way to a champion.
   and `THIRD_PLACE_SLOTS`. To update results as the tournament progresses, edit
   `FIXTURES` / `PLAYED_RESULTS` in `data.js` — **not** the HTML.
 - **`app.js`** computes standings, ranks qualifiers, assigns best-third-placed teams,
-  fills the bracket, renders everything, and handles prediction interaction. Scenario
-  state (predicted scores + bracket picks) persists in `localStorage`.
+  fills the bracket, renders everything, and handles prediction interaction.
+- **Persistence:** `data.js` is authoritative for **official (played) results** — they
+  always override `localStorage`, so editing a real scoreline in `FIXTURES` /
+  `PLAYED_RESULTS` shows up immediately for everyone. `localStorage`
+  (`wc2026-scenario-v2`) only stores the user's **predictions** for not-yet-played
+  matches plus their bracket picks (`loadState` / `saveState`). Bump the storage key
+  if you change the saved shape.
 - **`index.html`** holds only the page shell: the radio tab inputs, nav, empty
   `<section class="group-panel">` placeholders (filled by JS), and the
   `#bracket` section.
