@@ -1,0 +1,289 @@
+/* ===========================
+   CUSTOM PROPERTIES
+   =========================== */
+:root {
+  --bg:          #0a0e1a;
+  --bg-card:     #111827;
+  --bg-hover:    #1a2235;
+  --border:      #1e2d47;
+  --border-hi:   #2d4060;
+  --gold:        #f5c518;
+  --green:       #00c853;
+  --green-tint:  rgba(0, 200, 83, 0.10);
+  --red:         #ff5252;
+  --text:        #e8edf5;
+  --muted:       #6b7fa3;
+  --dim:         #3d5175;
+  --radius:      10px;
+}
+
+/* ===========================
+   RESET & BASE
+   =========================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* Hide tab radio inputs — they stay in DOM for :checked selectors */
+input[name="tabs"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===========================
+   HEADER
+   =========================== */
+header {
+  background: linear-gradient(160deg, #0d1527 0%, #0f1e38 50%, #0a0e1a 100%);
+  border-bottom: 1px solid var(--border-hi);
+  padding: 52px 24px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 25% 60%, rgba(245,197,24,.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 40%, rgba(26,86,219,.09) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.header-inner {
+  position: relative;
+  z-index: 1;
+  animation: fadeDown .6s ease both;
+}
+
+.host-line {
+  font-size: .72rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+header h1 {
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+header h1 em {
+  font-style: normal;
+  color: var(--gold);
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 18px rgba(245,197,24,.3); }
+  50%       { text-shadow: 0 0 40px rgba(245,197,24,.7), 0 0 70px rgba(245,197,24,.2); }
+}
+
+.sub {
+  font-size: .9rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================
+   GROUP NAV
+   =========================== */
+.group-nav {
+  display: flex;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.group-nav::-webkit-scrollbar { display: none; }
+
+.group-nav label {
+  flex: 0 0 auto;
+  padding: 14px 20px;
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: color .15s, border-color .15s, background .15s;
+  user-select: none;
+  white-space: nowrap;
+}
+.group-nav label:hover {
+  color: var(--text);
+  background: var(--bg-hover);
+}
+
+/* Active tab */
+#tab-a:checked ~ .group-nav label[for="tab-a"],
+#tab-b:checked ~ .group-nav label[for="tab-b"],
+#tab-c:checked ~ .group-nav label[for="tab-c"],
+#tab-d:checked ~ .group-nav label[for="tab-d"],
+#tab-e:checked ~ .group-nav label[for="tab-e"],
+#tab-f:checked ~ .group-nav label[for="tab-f"],
+#tab-g:checked ~ .group-nav label[for="tab-g"],
+#tab-h:checked ~ .group-nav label[for="tab-h"],
+#tab-i:checked ~ .group-nav label[for="tab-i"],
+#tab-j:checked ~ .group-nav label[for="tab-j"],
+#tab-k:checked ~ .group-nav label[for="tab-k"],
+#tab-l:checked ~ .group-nav label[for="tab-l"] {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* ===========================
+   MAIN
+   =========================== */
+main {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 36px 16px 72px;
+}
+
+/* ===========================
+   GROUP PANELS
+   =========================== */
+.group-panel { display: none; animation: fadeUp .22s ease both; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#tab-a:checked ~ main #panel-a { display: block; }
+#tab-b:checked ~ main #panel-b { display: block; }
+#tab-c:checked ~ main #panel-c { display: block; }
+#tab-d:checked ~ main #panel-d { display: block; }
+#tab-e:checked ~ main #panel-e { display: block; }
+#tab-f:checked ~ main #panel-f { display: block; }
+#tab-g:checked ~ main #panel-g { display: block; }
+#tab-h:checked ~ main #panel-h { display: block; }
+#tab-i:checked ~ main #panel-i { display: block; }
+#tab-j:checked ~ main #panel-j { display: block; }
+#tab-k:checked ~ main #panel-k { display: block; }
+#tab-l:checked ~ main #panel-l { display: block; }
+
+/* ===========================
+   PANEL HEADER
+   =========================== */
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.panel-header h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+
+/* ===========================
+   STANDINGS TABLE
+   =========================== */
+.standings {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.standings thead tr { background: var(--bg-hover); }
+
+.standings th {
+  padding: 10px 12px;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+.standings th.tcol { text-align: left; }
+
+.standings tbody tr {
+  border-top: 1px solid var(--border);
+  transition: background .12s;
+}
+.standings tbody tr:hover { background: var(--bg-hover); }
+
+.standings td {
+  padding: 13px 12px;
+  text-align: center;
+  font-size: .9rem;
+}
+.standings td.tcol { text-align: left; }
+
+.tname {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 150px;
+  white-space: nowrap;
+}
+.tname span { font-size: 1.25rem; line-height: 1; }
+
+.pts { font-weight: 700; font-size: 1rem; color: var(--gold); }
+
+.gdpos { color: var(--green); font-weight: 600; }
+.gdneg { color: var(--red);   font-weight: 600; }
+
+/* Top-2 qualifying rows */
+.adv { background: var(--green-tint) !important; }
+.adv td:first-child { border-left: 3px solid var(--green); }
+
+/* Separator below the qualification line (after 2nd place) */
+.adv + tr:not(.adv) { border-top: 2px solid var(--border-hi); }
+
+/* ===========================
+   FOOTER
+   =========================== */
+footer {
+  text-align: center;
+  padding: 24px;
+  font-size: .75rem;
+  color: var(--dim);
+  border-top: 1px solid var(--border);
+  letter-spacing: .05em;
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+@media (max-width: 480px) {
+  header { padding: 36px 16px 30px; }
+
+  .group-nav label { padding: 12px 15px; font-size: .8rem; }
+
+  .tname { min-width: 110px; }
+
+  .standings td,
+  .standings th { padding: 10px 8px; font-size: .82rem; }
+}
