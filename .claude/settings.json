@@ -5,8 +5,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd /Users/fabio/workspace/ai-coding-noble-desktop && git add -A && { git diff --cached --quiet || git commit -q -m 'Auto-commit: working-tree changes'; } 2>/dev/null; true",
-            "statusMessage": "Auto-committing changes..."
+            "command": "cd /Users/fabio/workspace/ai-coding-noble-desktop && git add -A && if ! git diff --cached --quiet; then files=$(git diff --cached --name-only | paste -sd ', ' -); git commit -q -m \"Update ${files}\" && git push -q; fi 2>/dev/null; true",
+            "statusMessage": "Auto-committing & pushing..."
           }
         ]
       }
