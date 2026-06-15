@@ -364,6 +364,7 @@ main {
 .fixture.fx-played .fx-md::after {
   content: ' ✓';
   color: var(--green);
+  display: inline-block; /* keeps underline from extending over the checkmark */
 }
 
 .fx-md {
