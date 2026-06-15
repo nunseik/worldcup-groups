@@ -85,7 +85,6 @@ async function main() {
 
   const results = {};       // "group:home:away" -> [hg, ag]   (finished only)
   const dates = {};         // "group:home:away" -> "yyyy-mm-dd" (all group matches)
-  const meta = {};          // "group:home:away" -> { time, ground, goals1, goals2 }
   const warnings = [];
   let applied = 0;
 
@@ -107,24 +106,12 @@ async function main() {
     const fxKey = `${fx.group}:${fx.home}:${fx.away}`;
 
     if (m.date) dates[fxKey] = m.date;
-
-    // Collect time + ground for all matches; goals only for played ones.
-    const entry = {};
-    if (m.time)   entry.time   = m.time;
-    if (m.ground) entry.ground = m.ground;
-
     if (m.score && Array.isArray(m.score.ft)) {
       // goals per team id, then orient to our fixture's home/away
       const goals = { [id1]: m.score.ft[0], [id2]: m.score.ft[1] };
       results[fxKey] = [goals[fx.home], goals[fx.away]];
       applied++;
-      // Scorers: orient to our home/away order
-      const mapGoals = (arr) => (arr || []).map((g) => ({ name: g.name, minute: g.minute }));
-      entry.goals1 = fx.home === id1 ? mapGoals(m.goals1) : mapGoals(m.goals2);
-      entry.goals2 = fx.away === id2 ? mapGoals(m.goals2) : mapGoals(m.goals1);
     }
-
-    if (Object.keys(entry).length) meta[fxKey] = entry;
   }
 
   let src = fs.readFileSync(DATA_PATH, 'utf8');
@@ -132,11 +119,9 @@ async function main() {
     ([hg, ag]) => `[${hg}, ${ag}]`));
   src = replaceBlock(src, 'FIXTURE_DATES', renderEntries(FIXTURES, dates,
     (d) => `'${d}'`));
-  src = replaceBlock(src, 'FIXTURE_META', renderEntries(FIXTURES, meta,
-    (obj) => JSON.stringify(obj)));   // inline JSON — no nested newlines
   fs.writeFileSync(DATA_PATH, src);
 
-  console.log(`Applied ${applied} group results, ${Object.keys(dates).length} dates, ${Object.keys(meta).length} meta entries.`);
+  console.log(`Applied ${applied} group results, ${Object.keys(dates).length} dates.`);
   if (warnings.length) console.warn('Warnings:\n  ' + warnings.join('\n  '));
 }
 

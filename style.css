@@ -432,57 +432,6 @@ a.fx-date-link:hover {
 .fx-goal::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .fx-goal:focus { outline: none; border-color: var(--gold); }
 
-/* === FIXTURE INFO CARD (hover / tap) === */
-.fixture { position: relative; }
-
-.fx-tname { cursor: pointer; }
-.fx-tname:hover { color: var(--gold); }
-
-.fx-card {
-  display: none;
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0; right: 0;
-  background: var(--bg-card);
-  border: 1px solid var(--border-hi);
-  border-radius: 8px;
-  padding: 10px 14px;
-  z-index: 30;
-  box-shadow: 0 6px 20px rgba(0,0,0,.45);
-  pointer-events: none;
-}
-.fixture:hover .fx-card,
-.fixture.fx-open .fx-card {
-  display: block;
-  pointer-events: auto;
-}
-
-.fx-card-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: .78rem;
-  color: var(--dim);
-  margin-bottom: 5px;
-}
-.fx-card-row:last-child { margin-bottom: 0; }
-.fx-card-icon { font-size: .9rem; flex: 0 0 auto; }
-.fx-card-tz { font-size: .68rem; color: var(--muted); margin-left: 4px; }
-
-.fx-card-goals {
-  display: flex;
-  gap: 10px;
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px solid var(--border);
-  font-size: .75rem;
-}
-.fx-card-g { flex: 1; color: var(--dim); line-height: 1.5; }
-.fx-card-g.home { text-align: right; }
-.fx-card-g.away { text-align: left; }
-.fx-card-min { color: var(--muted); font-size: .7rem; }
-.fx-card-none { color: var(--muted); }
-
 .fx-clear {
   flex: 0 0 auto;
   width: 24px;
