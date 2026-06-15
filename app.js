@@ -286,7 +286,7 @@ function fixtureRow(i) {
   const when = formatDate(f.date) || `MD${f.md}`;
   return `<div class="fixture${set ? ' fx-set' : ''}" data-idx="${i}">
     <span class="fx-md">${when}</span>
-    <span class="fx-team fx-home">${TEAMS[f.home].name} <span class="fx-flag">${TEAMS[f.home].flag}</span></span>
+    <span class="fx-team fx-home"><span class="fx-name">${TEAMS[f.home].name}</span> <span class="fx-flag">${TEAMS[f.home].flag}</span></span>
     <span class="fx-score">
       <input class="fx-goal" type="number" min="0" max="99" inputmode="numeric"
              data-idx="${i}" data-side="hg" value="${r.hg}" aria-label="${TEAMS[f.home].name} goals">
@@ -294,7 +294,7 @@ function fixtureRow(i) {
       <input class="fx-goal" type="number" min="0" max="99" inputmode="numeric"
              data-idx="${i}" data-side="ag" value="${r.ag}" aria-label="${TEAMS[f.away].name} goals">
     </span>
-    <span class="fx-team fx-away"><span class="fx-flag">${TEAMS[f.away].flag}</span> ${TEAMS[f.away].name}</span>
+    <span class="fx-team fx-away"><span class="fx-flag">${TEAMS[f.away].flag}</span> <span class="fx-name">${TEAMS[f.away].name}</span></span>
     <button class="fx-clear" data-clear="${i}" title="Clear result" aria-label="Clear result">×</button>
   </div>`;
 }

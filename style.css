@@ -370,12 +370,17 @@ main {
   align-items: center;
   gap: 7px;
   min-width: 0;
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 .fx-home { justify-content: flex-end; text-align: right; }
 .fx-away { justify-content: flex-start; }
+
+.fx-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .fx-flag { font-size: 1.15rem; line-height: 1; }
 
 .fx-score {
@@ -627,7 +632,7 @@ footer .credit a:hover { border-bottom-color: var(--gold); }
 
   .group-nav label { padding: 12px 15px; font-size: .8rem; }
 
-  .tname { min-width: 110px; }
+  .tname { min-width: 90px; white-space: normal; }
 
   .standings td,
   .standings th { padding: 10px 8px; font-size: .82rem; }
