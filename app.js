@@ -289,6 +289,45 @@ function matchSearchUrl(f) {
     encodeURIComponent(`${home} vs ${away} FIFA World Cup 2026`);
 }
 
+/* "13:00 UTC-6" + "2026-06-11" -> local-time string, e.g. "7:00 PM" */
+function kickoffLocal(timeStr, dateStr) {
+  const tm = /^(\d{1,2}):(\d{2})\s*UTC([+-]\d+)$/.exec((timeStr || '').trim());
+  const dm = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr || '');
+  if (!tm || !dm) return timeStr || '';
+  const utcH = +tm[1] - +tm[3]; // local hour minus UTC offset = UTC hour
+  const d = new Date(Date.UTC(+dm[1], +dm[2] - 1, +dm[3], utcH, +tm[2]));
+  return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+function goalsLine(goals) {
+  if (!goals || !goals.length) return '';
+  return goals.map((g) => `${g.name} <span class="fx-card-min">${g.minute}'</span>`).join(' &middot; ');
+}
+
+function fixtureInfoCard(f) {
+  const hasTime   = !!f.time;
+  const hasGround = !!f.ground;
+  const hasGoals  = f.played && (f.goals1 || f.goals2);
+  if (!hasTime && !hasGround && !hasGoals) return '';
+
+  let rows = '';
+  if (hasTime) {
+    const local = kickoffLocal(f.time, f.date);
+    rows += `<div class="fx-card-row"><span class="fx-card-icon">🕐</span><span>${local} <span class="fx-card-tz">local time</span></span></div>`;
+  }
+  if (hasGround) {
+    rows += `<div class="fx-card-row"><span class="fx-card-icon">📍</span><span>${f.ground}</span></div>`;
+  }
+  if (hasGoals) {
+    const g1 = goalsLine(f.goals1), g2 = goalsLine(f.goals2);
+    rows += `<div class="fx-card-goals">
+      <span class="fx-card-g home">${g1 || '<span class="fx-card-none">—</span>'}</span>
+      <span class="fx-card-g away">${g2 || '<span class="fx-card-none">—</span>'}</span>
+    </div>`;
+  }
+  return `<div class="fx-card" aria-hidden="true">${rows}</div>`;
+}
+
 function fixtureRow(i) {
   const f = FIXTURES[i];
   const r = state.results[i];
@@ -300,7 +339,7 @@ function fixtureRow(i) {
   const dateEl = `<a class="fx-md fx-date-link" href="${matchSearchUrl(f)}" target="_blank" rel="noopener" title="Open match info on Google">${when}</a>`;
   return `<div class="${cls}" data-idx="${i}">
     ${dateEl}
-    <span class="fx-team fx-home"><span class="fx-name">${TEAMS[f.home].name}</span> ${flagImg(TEAMS[f.home].flag, TEAMS[f.home].name)}</span>
+    <span class="fx-team fx-home"><span class="fx-name fx-tname">${TEAMS[f.home].name}</span> ${flagImg(TEAMS[f.home].flag, TEAMS[f.home].name)}</span>
     <span class="fx-score">
       <input class="fx-goal" type="number" min="0" max="99" inputmode="numeric"
              data-idx="${i}" data-side="hg" value="${r.hg}"${inputAttrs} aria-label="${TEAMS[f.home].name} goals">
@@ -308,8 +347,9 @@ function fixtureRow(i) {
       <input class="fx-goal" type="number" min="0" max="99" inputmode="numeric"
              data-idx="${i}" data-side="ag" value="${r.ag}"${inputAttrs} aria-label="${TEAMS[f.away].name} goals">
     </span>
-    <span class="fx-team fx-away">${flagImg(TEAMS[f.away].flag, TEAMS[f.away].name)} <span class="fx-name">${TEAMS[f.away].name}</span></span>
+    <span class="fx-team fx-away">${flagImg(TEAMS[f.away].flag, TEAMS[f.away].name)} <span class="fx-name fx-tname">${TEAMS[f.away].name}</span></span>
     ${locked ? '' : `<button class="fx-clear" data-clear="${i}" title="Clear result" aria-label="Clear result">×</button>`}
+    ${fixtureInfoCard(f)}
   </div>`;
 }
 
@@ -411,6 +451,22 @@ function onScoreInput(e) {
 }
 
 function onClick(e) {
+  // Team name tap → toggle fixture info card (primary mobile path)
+  const tname = e.target.closest('.fx-tname');
+  if (tname) {
+    const fixture = tname.closest('.fixture');
+    if (fixture) {
+      const wasOpen = fixture.classList.contains('fx-open');
+      document.querySelectorAll('.fixture.fx-open').forEach((el) => el.classList.remove('fx-open'));
+      if (!wasOpen) fixture.classList.add('fx-open');
+      return;
+    }
+  }
+  // Click outside any fixture → close all cards
+  if (!e.target.closest('.fixture')) {
+    document.querySelectorAll('.fixture.fx-open').forEach((el) => el.classList.remove('fx-open'));
+  }
+
   const clear = e.target.closest('.fx-clear');
   if (clear) {
     const i = Number(clear.dataset.clear);
