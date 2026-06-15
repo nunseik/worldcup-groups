@@ -65,10 +65,13 @@ winner re-propagates forward and drops any now-invalid downstream picks
 
 - **`scripts/update-results.mjs`** (Node 18+, no deps) pulls 2026 group-stage
   results from the [openfootball public-domain dataset](https://github.com/openfootball/worldcup.json)
-  and rewrites the `PLAYED_RESULTS` block in `data.js`. It loads `data.js` via
-  `node:vm`, maps source matches to our fixtures by the **unordered pair of team
-  ids** (so our synthetic schedule order doesn't matter), orients scores to our
-  home/away, and only writes **group** matches (knockouts stay user-picked).
+  and rewrites two auto-generated blocks in `data.js`: `PLAYED_RESULTS` (finished
+  scorelines) and `FIXTURE_DATES` (kick-off date for every group match, played or
+  not). It loads `data.js` via `node:vm`, maps source matches to our fixtures by
+  the **unordered pair of team ids** (so our synthetic schedule order doesn't
+  matter), orients scores to our home/away, and only writes **group** matches
+  (knockouts stay user-picked). `app.js` lists each group's fixtures in real
+  chronological order (by `FIXTURE_DATES`) and shows the date.
   Source team names that differ from `TEAMS[].name` are handled by `NAME_ALIASES`
   (e.g. "Czech Republic" → `cze`); add new aliases there if the updater logs an
   "Unmapped team" warning. Run locally: `node scripts/update-results.mjs`.

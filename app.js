@@ -84,7 +84,21 @@ function fixtureResult(i) {
 function groupFixtureIndexes(letter) {
   const idx = [];
   FIXTURES.forEach((f, i) => { if (f.group === letter) idx.push(i); });
+  // Chronological order (ISO dates sort lexically); fall back to matchday.
+  idx.sort((a, b) => {
+    const da = FIXTURES[a].date || '', db = FIXTURES[b].date || '';
+    return da.localeCompare(db) || (FIXTURES[a].md - FIXTURES[b].md) || (a - b);
+  });
   return idx;
+}
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/* "2026-06-11" -> "Jun 11" (date-only, no timezone math). '' if unknown. */
+function formatDate(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+  return m ? `${MONTHS[+m[2] - 1]} ${+m[3]}` : '';
 }
 
 /* --- Standings ----------------------------------------------------------- */
@@ -269,8 +283,9 @@ function fixtureRow(i) {
   const f = FIXTURES[i];
   const r = state.results[i];
   const set = r.hg !== '' && r.ag !== '';
+  const when = formatDate(f.date) || `MD${f.md}`;
   return `<div class="fixture${set ? ' fx-set' : ''}" data-idx="${i}">
-    <span class="fx-md">MD${f.md}</span>
+    <span class="fx-md">${when}</span>
     <span class="fx-team fx-home">${TEAMS[f.home].name} <span class="fx-flag">${TEAMS[f.home].flag}</span></span>
     <span class="fx-score">
       <input class="fx-goal" type="number" min="0" max="99" inputmode="numeric"

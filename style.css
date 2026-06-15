@@ -356,11 +356,12 @@ main {
 
 .fx-md {
   flex: 0 0 auto;
-  font-size: .6rem;
+  font-size: .62rem;
   font-weight: 700;
-  letter-spacing: .08em;
+  letter-spacing: .04em;
   color: var(--dim);
-  width: 30px;
+  width: 48px;
+  white-space: nowrap;
 }
 
 .fx-team {
@@ -632,7 +633,7 @@ footer .credit a:hover { border-bottom-color: var(--gold); }
   .standings th { padding: 10px 8px; font-size: .82rem; }
 
   .fixture { gap: 6px; padding: 8px; font-size: .78rem; }
-  .fx-md { display: none; }
+  .fx-md { width: 42px; font-size: .58rem; }
   .fx-goal { width: 32px; }
 
   #bracket { padding: 8px 12px 56px; }
