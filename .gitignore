@@ -18,3 +18,7 @@
 *.log
 .cache/
 tmp/
+
+# Environment / secrets
+.env
+.env.local
