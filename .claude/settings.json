@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /Users/fabio/workspace/ai-coding-noble-desktop && git add -A && { git diff --cached --quiet || git commit -q -m 'Auto-commit: working-tree changes'; } 2>/dev/null; true",
+            "statusMessage": "Auto-committing changes..."
+          }
+        ]
+      }
+    ]
+  }
+}
