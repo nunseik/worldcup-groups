@@ -271,21 +271,19 @@ main {
 .standings thead th:nth-child(4)::after { content: "Won"; }
 .standings thead th:nth-child(5)::after { content: "Drawn"; }
 .standings thead th:nth-child(6)::after { content: "Lost"; }
-.standings thead th:nth-child(7)::after { content: "Goal difference (scored − conceded)"; }
+.standings thead th:nth-child(7)::after { content: "Goal difference"; }
 .standings thead th:nth-child(8)::after { content: "Points\00000AWin = 3\00000ADraw = 1\00000ALoss = 0"; }
 
 /* Team column has no tooltip */
 .standings thead th.tcol::after { content: none; }
 
-/* Right-edge columns: anchor tooltip to the right so it stays on-screen.
+/* Pts (last column): anchor tooltip to the right so it stays on-screen.
    Now that the table no longer clips, it floats cleanly on top. */
-.standings thead th:nth-child(7)::after,
 .standings thead th:nth-child(8)::after {
   left: auto;
   right: 0;
   transform: translateY(4px);
 }
-.standings thead th:nth-child(7):hover::after,
 .standings thead th:nth-child(8):hover::after {
   transform: translateY(0);
 }
