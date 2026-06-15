@@ -529,13 +529,13 @@ main {
 
 .bkt-match {
   position: relative;
-  flex: 1 1 0;
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 3px;
-  min-height: 52px;
-  padding: 4px 0;
+  min-height: 78px;
+  padding: 6px 0;
 }
 
 /* Connector: horizontal line from each card to the next column */
