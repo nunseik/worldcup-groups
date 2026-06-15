@@ -154,6 +154,8 @@ const PLAYED_RESULTS = {
   // Group F
   'F:ned:jpn': [2, 2],
   'F:tun:swe': [1, 5],
+  // Group G
+  'G:bel:egy': [1, 1],
   // Group H
   'H:esp:cpv': [0, 0],
 };
