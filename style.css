@@ -207,12 +207,18 @@ main {
    =========================== */
 .standings {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  overflow: hidden;
 }
+
+/* Round corner cells (no overflow:hidden, so tooltips can escape) */
+.standings thead th:first-child { border-top-left-radius: var(--radius); }
+.standings thead th:last-child  { border-top-right-radius: var(--radius); }
+.standings tbody tr:last-child td:first-child { border-bottom-left-radius: var(--radius); }
+.standings tbody tr:last-child td:last-child  { border-bottom-right-radius: var(--radius); }
 
 .standings thead tr { background: var(--bg-hover); }
 
@@ -224,13 +230,68 @@ main {
   text-transform: uppercase;
   color: var(--muted);
   text-align: center;
+  position: relative;
+  cursor: help;
 }
-.standings th.tcol { text-align: left; }
+.standings th.tcol { text-align: left; cursor: default; }
 
-.standings tbody tr {
-  border-top: 1px solid var(--border);
-  transition: background .12s;
+/* ---- Header tooltips (pure CSS, by column position) ---- */
+.standings thead th::after {
+  content: "";
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #060912;
+  color: var(--text);
+  border: 1px solid var(--border-hi);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: none;
+  text-align: left;
+  white-space: pre;
+  line-height: 1.5;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s, transform .15s;
+  z-index: 500;
+  box-shadow: 0 6px 20px rgba(0,0,0,.5);
 }
+.standings thead th:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Tooltip text per column */
+.standings thead th:nth-child(1)::after { content: "League position"; }
+.standings thead th:nth-child(3)::after { content: "Played — matches played"; }
+.standings thead th:nth-child(4)::after { content: "Won"; }
+.standings thead th:nth-child(5)::after { content: "Drawn"; }
+.standings thead th:nth-child(6)::after { content: "Lost"; }
+.standings thead th:nth-child(7)::after { content: "Goal difference (scored − conceded)"; }
+.standings thead th:nth-child(8)::after { content: "Points\00000AWin = 3\00000ADraw = 1\00000ALoss = 0"; }
+
+/* Team column has no tooltip */
+.standings thead th.tcol::after { content: none; }
+
+/* Right-edge columns: anchor tooltip to the right so it stays on-screen.
+   Now that the table no longer clips, it floats cleanly on top. */
+.standings thead th:nth-child(7)::after,
+.standings thead th:nth-child(8)::after {
+  left: auto;
+  right: 0;
+  transform: translateY(4px);
+}
+.standings thead th:nth-child(7):hover::after,
+.standings thead th:nth-child(8):hover::after {
+  transform: translateY(0);
+}
+
+.standings tbody tr { transition: background .12s; }
+.standings tbody td { border-top: 1px solid var(--border); }
 .standings tbody tr:hover { background: var(--bg-hover); }
 
 .standings td {
@@ -260,7 +321,7 @@ main {
 .adv td:first-child { border-left: 3px solid var(--green); }
 
 /* Separator below the qualification line (after 2nd place) */
-.adv + tr:not(.adv) { border-top: 2px solid var(--border-hi); }
+.adv + tr:not(.adv) td { border-top: 2px solid var(--border-hi); }
 
 /* ===========================
    FOOTER
