@@ -230,10 +230,14 @@ function resolveBracket() {
    ========================================================================= */
 const $ = (sel, root = document) => root.querySelector(sel);
 
+function flagImg(code, name) {
+  return `<img class="flag-img" src="https://flagcdn.com/20x15/${code}.png" alt="${name} flag" width="20" height="15">`;
+}
+
 function teamCell(id) {
   if (!id) return '<span class="muted">—</span>';
   const t = TEAMS[id];
-  return `<span class="tflag">${t.flag}</span> ${t.name}`;
+  return `${flagImg(t.flag, t.name)} ${t.name}`;
 }
 
 function gdText(gd) {
@@ -248,7 +252,7 @@ function standingsRowsHTML(letter) {
     const adv = t.pos <= 2 ? ' class="adv"' : '';
     return `<tr${adv}>
       <td>${t.pos}</td>
-      <td class="tcol tname"><span>${TEAMS[t.id].flag}</span> ${TEAMS[t.id].name}</td>
+      <td class="tcol tname">${flagImg(TEAMS[t.id].flag, TEAMS[t.id].name)} ${TEAMS[t.id].name}</td>
       <td>${t.p}</td><td>${t.w}</td><td>${t.d}</td><td>${t.l}</td>
       <td>${gdText(t.gd)}</td><td class="pts">${t.pts}</td>
     </tr>`;
@@ -286,7 +290,7 @@ function fixtureRow(i) {
   const when = formatDate(f.date) || `MD${f.md}`;
   return `<div class="fixture${set ? ' fx-set' : ''}" data-idx="${i}">
     <span class="fx-md">${when}</span>
-    <span class="fx-team fx-home"><span class="fx-name">${TEAMS[f.home].name}</span> <span class="fx-flag">${TEAMS[f.home].flag}</span></span>
+    <span class="fx-team fx-home"><span class="fx-name">${TEAMS[f.home].name}</span> ${flagImg(TEAMS[f.home].flag, TEAMS[f.home].name)}</span>
     <span class="fx-score">
       <input class="fx-goal" type="number" min="0" max="99" inputmode="numeric"
              data-idx="${i}" data-side="hg" value="${r.hg}" aria-label="${TEAMS[f.home].name} goals">
@@ -294,7 +298,7 @@ function fixtureRow(i) {
       <input class="fx-goal" type="number" min="0" max="99" inputmode="numeric"
              data-idx="${i}" data-side="ag" value="${r.ag}" aria-label="${TEAMS[f.away].name} goals">
     </span>
-    <span class="fx-team fx-away"><span class="fx-flag">${TEAMS[f.away].flag}</span> <span class="fx-name">${TEAMS[f.away].name}</span></span>
+    <span class="fx-team fx-away">${flagImg(TEAMS[f.away].flag, TEAMS[f.away].name)} <span class="fx-name">${TEAMS[f.away].name}</span></span>
     <button class="fx-clear" data-clear="${i}" title="Clear result" aria-label="Clear result">×</button>
   </div>`;
 }

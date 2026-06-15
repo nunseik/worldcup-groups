@@ -381,7 +381,7 @@ main {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.fx-flag { font-size: 1.15rem; line-height: 1; }
+.flag-img { display: inline-block; vertical-align: middle; border-radius: 1px; }
 
 .fx-score {
   flex: 0 0 auto;
@@ -487,7 +487,7 @@ main {
   color: var(--gold);
 }
 .champion-team { font-size: 1.25rem; font-weight: 800; }
-.champion-team .tflag { font-size: 1.4rem; }
+.champion-team .flag-img { width: 28px; height: 21px; }
 
 .thirdplace { display: flex; align-items: center; gap: 12px; }
 .tp-label {
@@ -583,7 +583,7 @@ main {
 }
 .bkt-slot:first-child { border-radius: 8px 8px 0 0; }
 .bkt-slot:last-child  { border-radius: 0 0 8px 8px; border-top: none; }
-.bkt-slot .tflag { font-size: 1rem; margin-right: 3px; }
+.bkt-slot .flag-img { margin-right: 3px; }
 
 .bkt-slot:not(.is-empty):hover { background: var(--bg-hover); border-color: var(--border-hi); }
 .bkt-slot.is-winner {
