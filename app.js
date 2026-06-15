@@ -392,8 +392,13 @@ function onClick(e) {
   }
   const slot = e.target.closest('.bkt-slot');
   if (slot && slot.dataset.team) {
-    state.picks[Number(slot.dataset.match)] = slot.dataset.team;
-    rerenderBracketOnly();
+    const mid = Number(slot.dataset.match);
+    if (state.picks[mid] === slot.dataset.team) {
+      delete state.picks[mid]; // click the current winner again to deselect
+    } else {
+      state.picks[mid] = slot.dataset.team;
+    }
+    rerenderBracketOnly(); // resolveBracket() clears any now-stale downstream picks
     return;
   }
   const reset = e.target.closest('#reset-btn');
