@@ -138,9 +138,9 @@ const PLAYED_RESULTS = {
   // Group B — all four drew (0-0)
   'B:sui:bih': [0, 0],
   'B:can:qat': [0, 0],
-  // Group C — Scotland +1, Haiti -1, Brazil/Morocco drew
+  // Group C — Scotland +1, Haiti -1, Brazil 1-1 Morocco
   'C:sco:hai': [1, 0],
-  'C:bra:mar': [0, 0],
+  'C:bra:mar': [1, 1],
 };
 
 FIXTURES.forEach((f) => {
