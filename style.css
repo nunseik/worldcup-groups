@@ -375,6 +375,18 @@ main {
   width: 48px;
   white-space: nowrap;
 }
+a.fx-date-link {
+  text-decoration: none;
+  border-radius: 4px;
+  padding: 2px 3px;
+  margin: -2px -3px;
+  transition: color .15s, background .15s;
+}
+a.fx-date-link:hover {
+  color: var(--gold);
+  background: var(--bg-hover);
+  text-decoration: underline;
+}
 
 .fx-team {
   flex: 1 1 0;

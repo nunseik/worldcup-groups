@@ -283,6 +283,12 @@ function updateStandings(letter) {
   if (tb) tb.innerHTML = standingsRowsHTML(letter);
 }
 
+function matchSearchUrl(f) {
+  const home = TEAMS[f.home].name, away = TEAMS[f.away].name;
+  return 'https://www.google.com/search?q=' +
+    encodeURIComponent(`${home} vs ${away} FIFA World Cup 2026`);
+}
+
 function fixtureRow(i) {
   const f = FIXTURES[i];
   const r = state.results[i];
@@ -291,8 +297,9 @@ function fixtureRow(i) {
   const locked = f.played;
   const cls = ['fixture', set ? 'fx-set' : '', locked ? 'fx-played' : ''].filter(Boolean).join(' ');
   const inputAttrs = locked ? ' readonly disabled' : '';
+  const dateEl = `<a class="fx-md fx-date-link" href="${matchSearchUrl(f)}" target="_blank" rel="noopener" title="Open match info on Google">${when}</a>`;
   return `<div class="${cls}" data-idx="${i}">
-    <span class="fx-md">${when}</span>
+    ${dateEl}
     <span class="fx-team fx-home"><span class="fx-name">${TEAMS[f.home].name}</span> ${flagImg(TEAMS[f.home].flag, TEAMS[f.home].name)}</span>
     <span class="fx-score">
       <input class="fx-goal" type="number" min="0" max="99" inputmode="numeric"
