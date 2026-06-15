@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd /Users/fabio/workspace/ai-coding-noble-desktop && git add -A && if ! git diff --cached --quiet; then files=$(git diff --cached --name-only | paste -sd ', ' -); git commit -q -m \"Update ${files}\" && git push -q; fi 2>/dev/null; true",
+            "command": "cd /Users/fabio/workspace/ai-coding-noble-desktop && git add -A && if ! git diff --cached --quiet; then files=$(git diff --cached --name-only | paste -sd ', ' -); if git commit -q -m \"Update ${files}\" 2>/dev/null && git push -q 2>/dev/null; then printf '{\"systemMessage\": \"✅ Auto-commit: committed & pushed — %s\"}' \"${files}\"; else printf '{\"systemMessage\": \"⚠️ Auto-commit: commit or push failed — run git push manually\"}'; fi; else printf '{\"systemMessage\": \"ℹ️ Auto-commit: no changes to commit\"}'; fi; true",
             "statusMessage": "Auto-committing & pushing..."
           }
         ]
