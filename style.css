@@ -353,6 +353,18 @@ main {
   font-size: .85rem;
 }
 .fixture.fx-set { border-color: var(--border-hi); }
+.fixture.fx-played { background: var(--bg-card); opacity: .82; }
+.fixture.fx-played .fx-goal {
+  background: var(--bg-alt, var(--bg));
+  border-color: var(--border);
+  color: var(--dim);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.fixture.fx-played .fx-md::after {
+  content: ' ✓';
+  color: var(--green);
+}
 
 .fx-md {
   flex: 0 0 auto;

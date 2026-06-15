@@ -288,18 +288,21 @@ function fixtureRow(i) {
   const r = state.results[i];
   const set = r.hg !== '' && r.ag !== '';
   const when = formatDate(f.date) || `MD${f.md}`;
-  return `<div class="fixture${set ? ' fx-set' : ''}" data-idx="${i}">
+  const locked = f.played;
+  const cls = ['fixture', set ? 'fx-set' : '', locked ? 'fx-played' : ''].filter(Boolean).join(' ');
+  const inputAttrs = locked ? ' readonly disabled' : '';
+  return `<div class="${cls}" data-idx="${i}">
     <span class="fx-md">${when}</span>
     <span class="fx-team fx-home"><span class="fx-name">${TEAMS[f.home].name}</span> ${flagImg(TEAMS[f.home].flag, TEAMS[f.home].name)}</span>
     <span class="fx-score">
       <input class="fx-goal" type="number" min="0" max="99" inputmode="numeric"
-             data-idx="${i}" data-side="hg" value="${r.hg}" aria-label="${TEAMS[f.home].name} goals">
+             data-idx="${i}" data-side="hg" value="${r.hg}"${inputAttrs} aria-label="${TEAMS[f.home].name} goals">
       <span class="fx-colon">:</span>
       <input class="fx-goal" type="number" min="0" max="99" inputmode="numeric"
-             data-idx="${i}" data-side="ag" value="${r.ag}" aria-label="${TEAMS[f.away].name} goals">
+             data-idx="${i}" data-side="ag" value="${r.ag}"${inputAttrs} aria-label="${TEAMS[f.away].name} goals">
     </span>
     <span class="fx-team fx-away">${flagImg(TEAMS[f.away].flag, TEAMS[f.away].name)} <span class="fx-name">${TEAMS[f.away].name}</span></span>
-    <button class="fx-clear" data-clear="${i}" title="Clear result" aria-label="Clear result">×</button>
+    ${locked ? '' : `<button class="fx-clear" data-clear="${i}" title="Clear result" aria-label="Clear result">×</button>`}
   </div>`;
 }
 
