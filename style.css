@@ -606,6 +606,17 @@ footer {
   border-top: 1px solid var(--border);
   letter-spacing: .05em;
 }
+footer .credit {
+  margin-top: 8px;
+  color: var(--muted);
+}
+footer .credit a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s;
+}
+footer .credit a:hover { border-bottom-color: var(--gold); }
 
 /* ===========================
    RESPONSIVE
