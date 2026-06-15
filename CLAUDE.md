@@ -7,8 +7,10 @@ the user can predict all the way to a champion.
 
 ## Stack
 
-- **Vanilla HTML + CSS + JS — no build step, no dependencies.**
-- Four source files: `index.html`, `style.css`, `data.js`, `app.js`.
+- **Vanilla HTML + CSS + JS — no build step, no runtime dependencies.**
+- Site files: `index.html`, `style.css`, `data.js`, `app.js`.
+- Tooling (not shipped to the browser): `scripts/update-results.mjs` +
+  `.github/workflows/update-results.yml` auto-refresh results.
 - Opens directly in a browser; also served via GitHub Pages.
 
 ## Architecture
@@ -58,6 +60,25 @@ R16 → QF → SF → third-place play-off 103 / Final 104). Slots resolve from 
 standings (`winner`/`runner`/`third`) or earlier matches (`winOf`/`loseOf`). Picking a
 winner re-propagates forward and drops any now-invalid downstream picks
 (`resolveBracket`).
+
+## Auto-updating results
+
+- **`scripts/update-results.mjs`** (Node 18+, no deps) pulls 2026 group-stage
+  results from the [openfootball public-domain dataset](https://github.com/openfootball/worldcup.json)
+  and rewrites the `PLAYED_RESULTS` block in `data.js`. It loads `data.js` via
+  `node:vm`, maps source matches to our fixtures by the **unordered pair of team
+  ids** (so our synthetic schedule order doesn't matter), orients scores to our
+  home/away, and only writes **group** matches (knockouts stay user-picked).
+  Source team names that differ from `TEAMS[].name` are handled by `NAME_ALIASES`
+  (e.g. "Czech Republic" → `cze`); add new aliases there if the updater logs an
+  "Unmapped team" warning. Run locally: `node scripts/update-results.mjs`.
+- **`.github/workflows/update-results.yml`** runs it every 30 min (and on manual
+  dispatch); if `data.js` changed it commits, which redeploys Pages. Because
+  official results override `localStorage`, new scores reach all visitors while
+  their bracket predictions persist.
+- openfootball's 2026 groups currently match our seeded `GROUPS` exactly. If a
+  future real draw diverges, the updater logs "groups out of sync" warnings and
+  skips unmatched matches rather than writing bad data.
 
 ## Preview / deploy
 
