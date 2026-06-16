@@ -160,6 +160,8 @@ const PLAYED_RESULTS = {
   // Group H
   'H:esp:cpv': [0, 0],
   'H:uru:ksa': [1, 1],
+  // Group I
+  'I:fra:sen': [3, 1],
 };
 
 /* Kick-off date (ISO yyyy-mm-dd) per group match, keyed by "group:home:away".
