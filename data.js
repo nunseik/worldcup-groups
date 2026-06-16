@@ -156,6 +156,7 @@ const PLAYED_RESULTS = {
   'F:tun:swe': [1, 5],
   // Group G
   'G:bel:egy': [1, 1],
+  'G:irn:nzl': [2, 2],
   // Group H
   'H:esp:cpv': [0, 0],
   'H:uru:ksa': [1, 1],
