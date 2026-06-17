@@ -162,6 +162,7 @@ const PLAYED_RESULTS = {
   'H:uru:ksa': [1, 1],
   // Group I
   'I:fra:sen': [3, 1],
+  'I:nor:irq': [4, 1],
 };
 
 /* Kick-off date (ISO yyyy-mm-dd) per group match, keyed by "group:home:away".
