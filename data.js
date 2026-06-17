@@ -168,6 +168,8 @@ const PLAYED_RESULTS = {
   'J:aut:jor': [3, 1],
   // Group K
   'K:por:cod': [1, 1],
+  // Group L
+  'L:eng:cro': [4, 2],
 };
 
 /* Kick-off date (ISO yyyy-mm-dd) per group match, keyed by "group:home:away".
