@@ -139,6 +139,7 @@ const PLAYED_RESULTS = {
   // Group A
   'A:mex:rsa': [2, 0],
   'A:kor:cze': [2, 1],
+  'A:cze:rsa': [1, 1],
   // Group B
   'B:sui:qat': [1, 1],
   'B:can:bih': [1, 1],
