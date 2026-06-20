@@ -155,6 +155,7 @@ const PLAYED_RESULTS = {
   'D:usa:par': [4, 1],
   'D:aus:tur': [2, 0],
   'D:usa:aus': [2, 0],
+  'D:par:tur': [1, 0],
   // Group E
   'E:ger:cuw': [7, 1],
   'E:ecu:civ': [0, 1],
