@@ -160,6 +160,7 @@ const PLAYED_RESULTS = {
   'E:ger:cuw': [7, 1],
   'E:ecu:civ': [0, 1],
   // Group F
+  'F:ned:swe': [5, 1],
   'F:ned:jpn': [2, 2],
   'F:tun:swe': [1, 5],
   // Group G
