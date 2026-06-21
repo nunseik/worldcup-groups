@@ -172,6 +172,7 @@ const PLAYED_RESULTS = {
   // Group H
   'H:esp:cpv': [0, 0],
   'H:uru:ksa': [1, 1],
+  'H:esp:ksa': [4, 0],
   // Group I
   'I:fra:sen': [3, 1],
   'I:nor:irq': [4, 1],
