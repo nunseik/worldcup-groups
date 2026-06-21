@@ -169,6 +169,7 @@ const PLAYED_RESULTS = {
   // Group G
   'G:bel:egy': [1, 1],
   'G:irn:nzl': [2, 2],
+  'G:bel:irn': [0, 0],
   // Group H
   'H:esp:cpv': [0, 0],
   'H:uru:ksa': [1, 1],
