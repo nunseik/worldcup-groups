@@ -170,10 +170,12 @@ const PLAYED_RESULTS = {
   'G:bel:egy': [1, 1],
   'G:irn:nzl': [2, 2],
   'G:bel:irn': [0, 0],
+  'G:egy:nzl': [3, 1],
   // Group H
   'H:esp:cpv': [0, 0],
   'H:uru:ksa': [1, 1],
   'H:esp:ksa': [4, 0],
+  'H:uru:cpv': [2, 2],
   // Group I
   'I:fra:sen': [3, 1],
   'I:nor:irq': [4, 1],
