@@ -185,6 +185,7 @@ const PLAYED_RESULTS = {
   'J:arg:alg': [3, 0],
   'J:aut:jor': [3, 1],
   'J:arg:aut': [2, 0],
+  'J:alg:jor': [2, 1],
   // Group K
   'K:por:cod': [1, 1],
   'K:col:uzb': [3, 1],
