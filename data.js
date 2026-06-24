@@ -146,6 +146,8 @@ const PLAYED_RESULTS = {
   'B:can:qat': [6, 0],
   'B:sui:qat': [1, 1],
   'B:can:bih': [1, 1],
+  'B:sui:can': [2, 1],
+  'B:qat:bih': [1, 3],
   // Group C
   'C:sco:hai': [1, 0],
   'C:bra:mar': [1, 1],
