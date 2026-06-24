@@ -190,8 +190,10 @@ const PLAYED_RESULTS = {
   'K:por:cod': [1, 1],
   'K:col:uzb': [3, 1],
   'K:por:uzb': [5, 0],
+  'K:col:cod': [1, 0],
   // Group L
   'L:eng:gha': [0, 0],
+  'L:cro:pan': [1, 0],
   'L:eng:cro': [4, 2],
   'L:pan:gha': [0, 1],
 };
