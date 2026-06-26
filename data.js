@@ -158,6 +158,8 @@ const PLAYED_RESULTS = {
   'C:sco:bra': [0, 3],
   'C:mar:hai': [4, 2],
   // Group D
+  'D:usa:tur': [2, 3],
+  'D:aus:par': [0, 0],
   'D:usa:par': [4, 1],
   'D:aus:tur': [2, 0],
   'D:usa:aus': [2, 0],
