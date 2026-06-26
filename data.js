@@ -172,6 +172,8 @@ const PLAYED_RESULTS = {
   // Group F
   'F:ned:swe': [5, 1],
   'F:jpn:tun': [4, 0],
+  'F:ned:tun': [3, 1],
+  'F:jpn:swe': [1, 1],
   'F:ned:jpn': [2, 2],
   'F:tun:swe': [1, 5],
   // Group G
