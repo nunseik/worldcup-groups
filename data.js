@@ -191,6 +191,8 @@ const PLAYED_RESULTS = {
   // Group I
   'I:fra:irq': [3, 0],
   'I:sen:nor': [2, 3],
+  'I:fra:nor': [4, 1],
+  'I:sen:irq': [5, 0],
   'I:fra:sen': [3, 1],
   'I:nor:irq': [4, 1],
   // Group J
