@@ -179,6 +179,8 @@ const PLAYED_RESULTS = {
   'F:ned:jpn': [2, 2],
   'F:tun:swe': [1, 5],
   // Group G
+  'G:bel:nzl': [5, 1],
+  'G:irn:egy': [1, 1],
   'G:bel:egy': [1, 1],
   'G:irn:nzl': [2, 2],
   'G:bel:irn': [0, 0],
@@ -188,6 +190,8 @@ const PLAYED_RESULTS = {
   'H:uru:ksa': [1, 1],
   'H:esp:ksa': [4, 0],
   'H:uru:cpv': [2, 2],
+  'H:esp:uru': [1, 0],
+  'H:ksa:cpv': [0, 0],
   // Group I
   'I:fra:irq': [3, 0],
   'I:sen:nor': [2, 3],
