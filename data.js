@@ -213,6 +213,7 @@ const PLAYED_RESULTS = {
   'L:eng:gha': [0, 0],
   'L:cro:pan': [1, 0],
   'L:eng:pan': [2, 0],
+  'L:cro:gha': [2, 1],
   'L:eng:cro': [4, 2],
   'L:pan:gha': [0, 1],
 };
