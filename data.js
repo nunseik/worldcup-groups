@@ -200,6 +200,8 @@ const PLAYED_RESULTS = {
   'I:fra:sen': [3, 1],
   'I:nor:irq': [4, 1],
   // Group J
+  'J:arg:jor': [3, 1],
+  'J:aut:alg': [3, 3],
   'J:arg:alg': [3, 0],
   'J:aut:jor': [3, 1],
   'J:arg:aut': [2, 0],
@@ -209,6 +211,8 @@ const PLAYED_RESULTS = {
   'K:col:uzb': [3, 1],
   'K:por:uzb': [5, 0],
   'K:col:cod': [1, 0],
+  'K:por:col': [0, 0],
+  'K:uzb:cod': [1, 3],
   // Group L
   'L:eng:gha': [0, 0],
   'L:cro:pan': [1, 0],
